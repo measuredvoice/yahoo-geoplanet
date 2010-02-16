@@ -21,7 +21,7 @@ module Yahoo
             type  = element.attributes["type"].downcase.gsub(/\s+/, '_')
             value = element.inner_text
           
-            self.class.class_eval %(attr_accessor :#{type})
+            self.class.class_eval %(attr_accessor #{type.to_sym})
             self.instance_variable_set("@#{type}", value)
           rescue
             next
