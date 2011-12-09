@@ -32,12 +32,16 @@ A Ruby wrapper for the Yahoo! GeoPlanet APIs.
   # Everything you get back from the API you have direct access to
   # through the Place object. For example:
   
-  puts cmu.type           # "Point of Interest"
-  puts cmu.county         # "Allegheny"
-  puts cmu.latitude       # 40.444
-                          # Latitude and Longitude are values at Centroid
-  puts cmu.bounding_box   # [[40.44445, -79.943314], [40.44355, -79.944511]]
-                          # Bounding box are NW / SE coordinates in array
+  puts cmu.type               # "Point of Interest"
+  puts cmu.latitude           # 40.444
+                              # Latitude and Longitude are values at Centroid
+  puts cmu.bounding_box       # [[40.44445, -79.943314], [40.44355, -79.944511]]
+                              # Bounding box are NW / SE coordinates in array
+
+  # Some fields are added to a yfields hash to make them more error-resistant:
+  puts cmu.yfields['county']    # "Allegheny"
+  puts cmu.yfields['town']      # "Pittsburgh"
+  puts cmy.yfields['dominion']  # nil
   
   # We unlock the true power of GeoPlanet with association collections
   # Check out this truly amazing stuff:

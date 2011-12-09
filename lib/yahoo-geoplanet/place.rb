@@ -1,7 +1,7 @@
 module Yahoo
   module GeoPlanet
     class Place < Base
-      attr_reader  :woe_id, :type, :name
+      attr_reader  :woe_id, :type, :name, :yfields
       attr_reader  :latitude, :longitude, :bounding_box
       alias_method :lat, :latitude 
       alias_method :lon, :longitude
@@ -12,6 +12,7 @@ module Yahoo
         @woe_id = xml.at("woeid").inner_text
         @type   = xml.at("placeTypeName").inner_text
         @name   = xml.at("name").inner_text
+        @yfields = {}
         
         ["admin1", "admin2", "admin3", "locality1", "locality2", "postal"].each do |optional|
           begin
@@ -21,8 +22,7 @@ module Yahoo
             type  = element.attributes["type"].downcase.gsub(/\s+/, '_')
             value = element.inner_text
           
-            self.class.class_eval %(attr_accessor #{type.to_sym})
-            self.instance_variable_set("@#{type}", value)
+            @yfields[type] = value
           rescue
             next
           end
