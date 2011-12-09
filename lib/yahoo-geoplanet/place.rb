@@ -14,7 +14,7 @@ module Yahoo
         @name   = xml.at("name").inner_text
         @yfields = {}
         
-        ["admin1", "admin2", "admin3", "locality1", "locality2", "postal"].each do |optional|
+        ["admin1", "admin2", "admin3", "locality1", "locality2", "postal", "country"].each do |optional|
           begin
             element = xml.at(optional)
             next if element.empty?
